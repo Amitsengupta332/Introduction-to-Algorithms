@@ -3,6 +3,7 @@ using namespace std;
 vector<int> adj_list[1005];
 bool vis[1005];
 int level[1005];
+int parent[1005];
 
 void bfs(int src)
 {
@@ -10,6 +11,7 @@ void bfs(int src)
     q.push(src);
     vis[src] = true;
     level[src] = 0;
+    // parent[src] = -1;
 
     while (!q.empty())
     {
@@ -23,6 +25,7 @@ void bfs(int src)
                 q.push(child);
                 vis[child] = true;
                 level[child] = level[par] + 1;
+                parent[child] = par;
             }
         }
     }
@@ -42,30 +45,28 @@ int main()
     }
     memset(vis, false, sizeof(vis));
     memset(level, -1, sizeof(level));
+    memset(parent, -1, sizeof(parent));
     int src, des;
     cin >> src >> des;
     bfs(src);
 
+
+    vector<int> path;
+    int node = des;
+    while (node != -1)
+    {
+        path.push_back(node);
+        // cout << node << " ";
+        node = parent[node];
+    }
+    cout << endl;
+
     // for (int i = 0; i < n; i++)
     // {
-    //     cout << i << " -> " << level[i] << endl;
+    //     cout << i << " parent-> " << parent[i] << endl;
     // }
-    
-    cout << level[des] << endl;
+
+    // cout << level[des] << endl;
 
     return 0;
 }
-
-/* 
-7 8
-0 1
-1 3
-3 2
-1 4
-3 5
-2 5
-5 6
-4 6
-0
-4
-*/
