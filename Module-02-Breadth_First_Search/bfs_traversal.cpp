@@ -3,7 +3,7 @@ using namespace std;
 vector<int> adj_list[1005];
 bool vis[1005];
 
-void bfs( int src)
+void bfs(int src)
 {
     queue<int> q;
     q.push(src);
@@ -11,35 +11,32 @@ void bfs( int src)
 
     while (!q.empty())
     {
-         // ber kore ana
-         int par = q.front();
-         q.pop();
-          
+        // ber kore ana
+        int par = q.front();
+        q.pop();
 
-         // oi node niye kaj kora
-         cout << par << " ";
-         // children k push kora
-         for (int child : adj_list[par])
-         {
+        // oi node niye kaj kora
+        cout << par << " ";
+        // children k push kora
+        for (int child : adj_list[par])
+        {
             // q.push(child);
             // vis[child] = true;
-             if (vis[child] == false)
-             {
-                 q.push(child);
-                 vis[child] = true;
-             }
-         }
+            if (!vis[child])
+            {
+                q.push(child);
+                vis[child] = true;
+            }
+        }
     }
-    
 }
 
 int main()
 {
     int n, e;
     cin >> n >> e;
-    
-    
-    while(e--)
+
+    while (e--)
     {
         int a, b;
         cin >> a >> b;
