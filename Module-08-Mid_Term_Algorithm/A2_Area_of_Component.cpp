@@ -14,7 +14,7 @@ bool valid(int i, int j)
 int dfs(int si, int sj)
 {
     vis[si][sj] = true;
-    int cnt = 1;  
+    int cnt = 1;
     for (auto dir : d)
     {
         int ci = si + dir.first;
@@ -28,6 +28,36 @@ int dfs(int si, int sj)
 }
 int main()
 {
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> grid[i][j];
+        }
+    }
+
+    memset(vis, false, sizeof(vis));
+    int min_area = INT_MAX;
+    bool found = false;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (grid[i][j] == '.' && !vis[i][j])
+            {
+                int area = dfs(i, j);
+                min_area = min(min_area, area);
+                found = true;
+            }
+        }
+    }
+
+    if (!found)
+        cout << -1 << endl;
+    else
+        cout << min_area <<  endl;
 
     return 0;
 }
