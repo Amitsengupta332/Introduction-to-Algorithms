@@ -30,42 +30,42 @@ int main()
         {
             for (int j = 0; j < n; j++)
             {
-
                 if (adj_mat[i][k] != INT_MAX && adj_mat[k][j] != INT_MAX && adj_mat[i][k] + adj_mat[k][j] < adj_mat[i][j])
                 {
                     adj_mat[i][j] = adj_mat[i][k] + adj_mat[k][j];
                 }
-                // cout << i << " " << k << " " << j << " " << endl;
-
-                // for (int k = 0; k < n; k++)
-                // {
-                //     cout << i << " " << k << " " << j << " " << endl;
-                //     // adj_mat[j][k] = min(adj_mat[j][k], adj_mat[j][i] + adj_mat[i][k]);
-                // }
             }
         }
     }
 
+    bool cycle = false;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        if (adj_mat[i][i] < 0)
         {
-            if (adj_mat[i][j] == INT_MAX)
-                cout << "INF ";
-            else
-                cout << adj_mat[i][j] << " ";
+            cycle = true;
+            break;
         }
-        cout << endl;
+    }
+
+    if (cycle)
+    {
+        cout << "Negative Weighted Cycle Detected" << endl;
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (adj_mat[i][j] == INT_MAX)
+                    cout << "INF ";
+                else
+                    cout << adj_mat[i][j] << " ";
+            }
+            cout << endl;
+        }
     }
 
     return 0;
 }
-
-/*
-4 5
-0 1 3
-0 2 6
-1 2 2
-1 3 5
-2 3 4
-*/
