@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int par[1005];
 int group_size[1005];
 int find(int node)
@@ -32,13 +33,40 @@ int main()
 {
     memset(par, -1, sizeof(par));
     memset(group_size, 1, sizeof(group_size));
-    dsu_union(1, 2);
+    int e, n;
+    cin >> n >> e;
+    bool cycle = false;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        int leaderA = find(a);
+        int leaderB = find(b);
 
-    // cout << find(4) << endl;
+        if (leaderA == leaderB)
+        {
+            cycle = true;
+        }
+        else
+        {
 
-    for (int i = 0; i < 6; i++)
-        cout << i << " -> " << par[i] << endl;
+            dsu_union(a, b);
+        }
+    }
+
+    if (cycle)
+        cout << "Cycle detected" << endl;
+    else
+        cout << "No cycle detected" << endl;
     return 0;
 }
 
-// https://github.com/phitronio/Batch-7-Introduction-to-Algorithms/blob/main/Module%2011/union.cpp
+/*
+6 6
+0 1
+1 2
+0 4
+4 5
+5 3
+3 4
+*/
