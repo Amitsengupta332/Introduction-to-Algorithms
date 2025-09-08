@@ -1,16 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int fact(int n)
+int fibo(int n)
 {
     if (n == 1)
         return 1;
-    int mul = fact(n - 1);
+    int mul = fibo(n - 1);
     return n * mul;
 }
 
 int main()
 {
-    cout << fact(5) << endl;
+    cout << fibo(5) << endl;
     return 0;
 }
